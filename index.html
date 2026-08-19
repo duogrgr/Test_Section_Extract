@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b1519" />
+    <meta
+      name="description"
+      content="Встряхни устройство — и контент проявится из дымки. Save the Date."
+    />
+    <title>Save the Date — встряхни устройство</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Для обёртки в Telegram Mini App раскомментируй строку ниже: -->
+    <!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
+  </head>
+  <body data-state="0">
+    <div id="stage">
+      <!-- Живой фон: два слоя дыма, тёплое свечение, зерно -->
+      <div class="smoke smoke-a" aria-hidden="true"></div>
+      <div class="smoke smoke-b" aria-hidden="true"></div>
+      <div class="glow" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">SD·26</span>
+          <span class="brand-sub">save the date</span>
+        </div>
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </header>
+
+      <main class="scene">
+        <!-- Стейт 1: логотипы-плейсхолдеры -->
+        <div class="logos" data-reveal="1">
+          <div class="logo-chip small left">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <rect
+                x="12" y="12" width="24" height="24" rx="3"
+                transform="rotate(45 24 24)"
+                stroke="#9fd6c9" stroke-width="2" fill="none"
+              />
+              <circle cx="24" cy="24" r="4" fill="#9fd6c9" />
+            </svg>
+            <span>лого 02</span>
+          </div>
+          <div class="logo-chip main">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path
+                d="M24 4l4.6 15.4L44 24l-15.4 4.6L24 44l-4.6-15.4L4 24l15.4-4.6Z"
+                stroke="#f5b83d" stroke-width="2" fill="none" stroke-linejoin="round"
+              />
+              <circle cx="24" cy="24" r="2.4" fill="#f5b83d" />
+            </svg>
+            <span>лого 01</span>
+          </div>
+          <div class="logo-chip small right">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path
+                d="M8 18c5-6 11 6 16 0s11 6 16 0M8 30c5-6 11 6 16 0s11 6 16 0"
+                stroke="#ff8f6b" stroke-width="2" fill="none" stroke-linecap="round"
+              />
+            </svg>
+            <span>лого 03</span>
+          </div>
+        </div>
+
+        <!-- Стейт 2: дата -->
+        <div class="date-block" data-reveal="2" style="--d: 0.12s">
+          <p class="date-weekday" id="dateWeekday">—</p>
+          <h1 class="date-big" id="dateBig">—</h1>
+          <p class="date-meta" id="dateMeta">—</p>
+        </div>
+
+        <!-- Стейт 3: редактируемый текст -->
+        <div class="message" data-reveal="3" style="--d: 0.1s">
+          <div class="message-card">
+            <p id="messageInput" contenteditable="true" spellcheck="false"></p>
+          </div>
+          <p class="message-hint">
+            <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M11.5 2.5l2 2L5 13l-2.7.7L3 11l8.5-8.5z"
+                stroke="currentColor" stroke-width="1.4" fill="none"
+                stroke-linejoin="round"
+              />
+            </svg>
+            нажми на текст, чтобы отредактировать
+          </p>
+        </div>
+      </main>
+
+      <p class="status">
+        <span id="statusText">Встряхни устройство — дымка рассеется</span>
+        <span class="status-key">нет сенсора — пробел</span>
+      </p>
+
+      <button id="swipeHint" class="swipe-hint" type="button" aria-label="Открыть действия">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M5 9l7 7 7-7"
+            stroke="currentColor" stroke-width="2.2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round"
+          />
+        </svg>
+        <span>свайп вниз</span>
+      </button>
+
+      <!-- Стейт 0: дымка -->
+      <div id="haze">
+        <div class="haze-fog fog-a" aria-hidden="true"></div>
+        <div class="haze-fog fog-b" aria-hidden="true"></div>
+        <div class="haze-core">
+          <div class="shake-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" stroke-linecap="round">
+              <path class="arc" d="M9 18a21 21 0 0 0 0 28" stroke="#f5b83d" stroke-width="2" opacity=".5" />
+              <path class="arc" d="M16 22a14 14 0 0 0 0 20" stroke="#f5b83d" stroke-width="2.4" />
+              <path class="arc" d="M48 22a14 14 0 0 1 0 20" stroke="#f5b83d" stroke-width="2.4" />
+              <path class="arc" d="M55 18a21 21 0 0 1 0 28" stroke="#f5b83d" stroke-width="2" opacity=".5" />
+              <rect x="23" y="12" width="18" height="40" rx="4.5" stroke="#eaf4f2" stroke-width="2.4" />
+              <path d="M29 17.5h6" stroke="#8fa8a6" stroke-width="2" />
+              <circle cx="32" cy="46" r="1.8" fill="#8fa8a6" stroke="none" />
+            </svg>
+          </div>
+          <p class="haze-title">Встряхни<br />устройство</p>
+          <p class="haze-sub">контент скрыт в дымке · 3 встряски + свайп</p>
+          <button id="enableMotion" class="btn btn-sensor" type="button" hidden>
+            Включить датчик движения
+          </button>
+          <p id="sensorNote" class="sensor-note" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- Стейт 4: нижний блок -->
+      <div id="sheetBackdrop"></div>
+      <section id="sheet" class="sheet" aria-hidden="true">
+        <div class="sheet-grab" aria-hidden="true"></div>
+        <button id="sheetClose" class="sheet-close" type="button" aria-label="Закрыть">
+          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+        </button>
+        <h2 class="sheet-title">Обратный отсчёт</h2>
+        <div class="countdown" id="countdown">
+          <div class="cd-cell">
+            <span class="num" id="cdD">—</span><span class="lbl">дней</span>
+          </div>
+          <div class="cd-cell">
+            <span class="num" id="cdH">—</span><span class="lbl">часов</span>
+          </div>
+          <div class="cd-cell">
+            <span class="num" id="cdM">—</span><span class="lbl">минут</span>
+          </div>
+          <div class="cd-cell" id="cdSecCell">
+            <span class="num" id="cdS">—</span><span class="lbl">секунд</span>
+          </div>
+        </div>
+        <p id="cdDone" class="cd-done" hidden>Момент настал!</p>
+
+        <button id="saveBtn" class="btn btn-primary" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.9" fill="none" />
+            <path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+            <path
+              d="M12 12.5v5m0 0l-2.3-2.3m2.3 2.3l2.3-2.3"
+              stroke="currentColor" stroke-width="1.9" fill="none"
+              stroke-linecap="round" stroke-linejoin="round"
+            />
+          </svg>
+          <span>Save date (.ics)</span>
+        </button>
+        <p class="ics-note">файл откроется в Apple, Google и Outlook календарях</p>
+
+        <div class="savers">
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="9" cy="8.5" r="3.2" stroke="currentColor" stroke-width="1.8" fill="none" />
+            <path
+              d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"
+            />
+            <path
+              d="M15.5 5.8a3.2 3.2 0 1 1 .1 6.3M17.5 14.4c1.7.7 2.7 2.3 3 4.6"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"
+            />
+          </svg>
+          <p class="savers-line">
+            <strong id="saversCount">0</strong>&nbsp;<span id="saversWord">человек сохранили дату</span>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
